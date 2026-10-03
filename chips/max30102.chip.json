@@ -1,0 +1,10 @@
+{
+  "name": "MAX30102",
+  "author": "Moniteur patient",
+  "pins": ["SCL", "SDA", "VCC", "GND"],
+  "controls": [
+    { "id": "bpm",    "label": "Frequence cardiaque (BPM)", "type": "slider", "min": 40, "max": 180, "step": 1 },
+    { "id": "spo2",   "label": "SpO2 (%)",                  "type": "slider", "min": 80, "max": 100, "step": 1 },
+    { "id": "finger", "label": "Doigt present (1) / absent (0)", "type": "slider", "min": 0, "max": 1, "step": 1 }
+  ]
+}

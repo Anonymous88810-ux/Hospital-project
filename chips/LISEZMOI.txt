@@ -1,0 +1,20 @@
+CHIP MAX30102 (optionnel) - pour simuler un vrai capteur dans VS Code
+=====================================================================
+
+Sans ce chip, le projet fonctionne deja : le firmware detecte l'absence du MAX30102
+et simule BPM / SpO2 avec les curseurs du tableau de bord web.
+
+Pour utiliser le chip MAX30102 dans VS Code, il faut le compiler en WebAssembly :
+
+1. Telechargez https://wokwi.com/api/chips/wokwi-api.h et placez-le dans ce dossier (chips/).
+2. Compilez (Docker requis) depuis le dossier chips/ :
+     docker run --rm -u 1000:1000 -v ${PWD}:/src wokwi/builder-clang-wasm:latest make
+   Resultat : chips/max30102.chip.wasm  (le fichier max30102.chip.json doit rester a cote).
+3. Ajoutez a la fin de wokwi.toml :
+     [[chip]]
+     name = 'max30102'
+     binary = 'chips/max30102.chip.wasm'
+4. Remplacez diagram.json par diagram_avec_chip.json.
+5. Relancez : Wokwi: Start Simulator. Cliquez sur le chip pour regler BPM, SpO2 et "doigt".
+
+Si wokwi.toml contient [[chip]] mais que le fichier .wasm n'existe pas, la simulation ne demarre pas.
